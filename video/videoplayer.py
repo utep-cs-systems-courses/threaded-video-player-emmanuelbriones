@@ -80,3 +80,16 @@ def displayFrames(frames):
     print('Finished displaying all the frames') # end
     cv2.destroyAllWindows() # cleanup
 
+if __name__ == "__main__":
+
+    colorFrames = ThreadQueue()
+    grayFrames = ThreadQueue()
+
+    extractThread = threading.Thread(target = extractFrames, args = (VIDEOFILE, colorFrames))
+    convertThread = threading.Thread(target = convertGrayscale, args = (colorFrames, grayFrames))
+    displayThread = threading.Thread(target = displayFrames, args = (grayFrames,)) 
+
+    # start threads
+    extractThread.start()
+    convertThread.start()
+    displayThread.start()
