@@ -56,3 +56,27 @@ def convertGrayscale(colorFrames, grayFrames):
 
     print('Conversion to grayscale complete') # end
     grayFrames.put(DELIMITER)
+
+def displayFrames(frames):
+    # check if null
+    if frames is None:
+        raise TypeError
+
+    count = 0 # frame count
+
+    frame = frames.obtain()
+
+    while frame is not DELIMITER:
+        print(f'Displaying frame {count}')
+
+        cv2.imshow('Video Play', frame)
+
+        if cv2.waitKey(FRAMEDELAY) and 0xFF == ord("q"):
+            break
+
+        count += 1
+        frame = frames.obtain()
+
+    print('Finished displaying all the frames') # end
+    cv2.destroyAllWindows() # cleanup
+
