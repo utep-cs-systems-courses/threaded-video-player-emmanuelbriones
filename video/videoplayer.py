@@ -82,8 +82,8 @@ def displayFrames(frames):
 
 if __name__ == "__main__":
 
-    colorFrames = ThreadQueue()
-    grayFrames = ThreadQueue()
+    colorFrames = queue()
+    grayFrames = queue()
 
     extractThread = threading.Thread(target = extractFrames, args = (VIDEOFILE, colorFrames))
     convertThread = threading.Thread(target = convertGrayscale, args = (colorFrames, grayFrames))
