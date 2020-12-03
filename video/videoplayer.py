@@ -52,7 +52,7 @@ def convertGrayscale(colorFrames, grayFrames):
         grayFrame = cv2.cvtColor(colorFrame, cv2.COLOR_BGR2GRAY)
         grayFrames.put(grayFrame) # enqueue into queue
         count += 1
-        colorFrame = colorFrames.obtain() # dequeue next frame
+        colorFrame = colorFrames.get() # dequeue next frame
 
     print('Conversion to grayscale complete') # end
     grayFrames.put(DELIMITER)
@@ -64,7 +64,7 @@ def displayFrames(frames):
 
     count = 0 # frame count
 
-    frame = frames.obtain()
+    frame = frames.get()
 
     while frame is not DELIMITER:
         print(f'Displaying frame {count}')
@@ -75,7 +75,7 @@ def displayFrames(frames):
             break
 
         count += 1
-        frame = frames.obtain()
+        frame = frames.get()
 
     print('Finished displaying all the frames') # end
     cv2.destroyAllWindows() # cleanup
