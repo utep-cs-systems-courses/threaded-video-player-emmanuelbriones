@@ -43,7 +43,7 @@ def convertGrayscale(colorFrames, grayFrames):
 
     count = 0 # frame count
 
-    colorFrame = colorFrames.obtain() # get first color frame
+    colorFrame = colorFrames.get() # get first color frame
 
     while colorFrame is not DELIMITER:
         print(f'Converting frame {count}')
