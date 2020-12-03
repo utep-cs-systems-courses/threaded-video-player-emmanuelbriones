@@ -33,3 +33,26 @@ def extractFrames(fileName, frameQueue):
 
     print('Finished extracting frames'); # end 
     frameQueue.put(DELIMITER)
+
+def convertGrayscale(colorFrames, grayFrames):
+    # check if null
+    if colorFrames is None:
+        raise TypeError
+    if grayFrames is None:
+        raise TypeError
+
+    count = 0 # frame count
+
+    colorFrame = colorFrames.obtain() # get first color frame
+
+    while colorFrame is not DELIMITER:
+        print(f'Converting frame {count}')
+
+        # convert to grayscale
+        grayFrame = cv2.cvtColor(colorFrame, cv2.COLOR_BGR2GRAY)
+        grayFrames.put(grayFrame) # enqueue into queue
+        count += 1
+        colorFrame = colorFrames.obtain() # dequeue next frame
+
+    print('Conversion to grayscale complete') # end
+    grayFrames.put(DELIMITER)
